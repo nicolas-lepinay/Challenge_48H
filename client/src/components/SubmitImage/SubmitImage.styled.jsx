@@ -7,7 +7,7 @@ export const Container = styled.div`
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     color: black;
     margin: auto;
-    width: 50%;
+    width: 55%;
 `
 
 export const Wrapper = styled.div`
@@ -28,7 +28,7 @@ export const Top = styled.div`
 
 export const HR = styled.hr`
     margin: 20px;
-    opacity: 0.3;
+    opacity: 0.2;
 `
 
 export const Bottom = styled.form`
@@ -51,6 +51,9 @@ export const Option = styled.label`
     & > input {
         display: none;
     }
+    & > input.show {
+        display: block;
+    }
 `
 
 export const SVG = styled.img`
@@ -72,6 +75,18 @@ export const Button = styled.button`
     font-weight: 500;
     letter-spacing: 1px;
     margin-right: 20px;
-    padding: 7px;
+    padding: 7px 14px;
     text-transform: uppercase;
+`
+
+export const YoutubeInput = styled.input`
+    padding: 1rem 3rem 0 3rem;
+    border: none;
+    width: 80%;
+    &:focus {
+        outline: none;
+    }
+    & ~ .youtube-submit {
+        font-size: 0.5rem;
+    }
 `
