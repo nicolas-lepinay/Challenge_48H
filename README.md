@@ -1,5 +1,8 @@
 # Challenge_48H
 
+Depuis une Smart TV, naviguez vers l'application pour visionner le flux vidéo configuré.\
+Depuis un ordinateur, naviguez vers l'application et taper sur la touche Echap pour accéder au panneau administrateur et configurer le flux à diffuser.
+
 # Installation des packages :
 1. cd api 👉 npm install
 2. cd client 👉 npm install
