@@ -1,13 +1,13 @@
-// React :
+// 🌌 React :
 import { useContext, useRef, useState } from "react";
 
-// User Context :
+// 🦸‍♀️ User Context :
 import { UserContext } from "../../context/UserContext";
 
-// Styled components :
+// 💅🏻 Styled components :
 import { Container, Wrapper, Top, HR, Bottom, Options, Option, SVG, Button } from './SubmitImage.styled';
 
-// Axios :
+// 🅰️ Axios :
 import axios from "axios";
 
 function SubmitImage() {
@@ -15,29 +15,36 @@ function SubmitImage() {
   const ASSETS = process.env.REACT_APP_PUBLIC_ASSETS_FOLDER;
 
   const { user, setUser } = useContext(UserContext);    // Utilisateur loggé
-  const [file, setFile] = useState(null);               // Fichier sélectionné par l'utilisateur
+  const [image, setImage] = useState(null);               // Fichier (image) sélectionné par l'utilisateur
+  const [video, setVideo] = useState(null);               // Fichier (vidéo) sélectionné par l'utilisateur
+
   const title = useRef();                               // Titre du média
 
-  // Upload d'une image :
+  // Upload d'un fichier (image ou vidéo) :
   const submitHandler = async (e) => {
     e.preventDefault();
     var newMedia = {
         userId: user._id,
-        type: "image",
         title: title.current.value,
     }
+
+    image && (newMedia.type = 'image');
+    video && (newMedia.type = 'video');
 
     const formData = new FormData();
     const date = new Date(Date.now()).toISOString().replaceAll(':', '-'); // 2022-12-25T18-30-00.000Z
     
-    const fileName = date + "_" + file.name;
+    const fileName = date + "_" + (image?.name || video?.name);
     formData.append("name", fileName);
-    formData.append("file", file);
+    formData.append("file", image || video);
     newMedia.file = fileName;
 
     // Upload du fichier sur le serveur :
     try {
-        await axios.post("/uploadImage", formData)
+        image ? 
+        await axios.post("/upload/image", formData)
+        : 
+        await axios.post("/upload/video", formData)
     } catch (err) {
         console.log(err)
     }
@@ -63,16 +70,26 @@ function SubmitImage() {
           <Bottom onSubmit={submitHandler}>
               <Options>
                   <Option htmlFor="file">
-                      <SVG src={`${ASSETS}/icons/media-image.svg`} title="Parcourir"/>
+                      <SVG src={`${ASSETS}/icons/media-image.svg`} title="Choisir une image"/>
                       <input 
                         id="file" 
                         type="file" 
                         accept=".png, .jpg, .jpeg, .gif, .webp" 
-                        onChange={ (e) => setFile(e.target.files[0])}
+                        onChange={ (e) => { setImage(e.target.files[0]); setVideo(null) }}
+                        />
+                  </Option>
+
+                  <Option htmlFor="file-video">
+                      <SVG src={`${ASSETS}/icons/media-video.svg`} title="Choisir une vidéo"/>
+                      <input 
+                        id="file-video" 
+                        type="file" 
+                        accept=".mp4, .avi" 
+                        onChange={ (e) => { setVideo(e.target.files[0]); setImage(null) }}
                         />
                   </Option>
               </Options>
-              <Button type="submit">Ajouter</Button>
+              <Button type="submit" disabled={image || video ? false : true}>Ajouter</Button>
           </Bottom>
       </Wrapper>
   </Container>

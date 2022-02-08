@@ -1,8 +1,8 @@
-// React :
+// 🌌 React :
 import { useState, useEffect, useContext, useRef } from "react"
 import { Link, useHistory } from "react-router-dom"
 
-// User Context :
+// 🦸‍♀️ User Context :
 import { UserContext } from "../../context/UserContext"
 
 // React Components:
@@ -10,10 +10,10 @@ import Navbar from '../../components/Navbar/Navbar';
 import SingleMedia from '../../components/SingleMedia/SingleMedia';
 import SubmitImage from '../../components/SubmitImage/SubmitImage'
 
-// Styled components :
+// 💅🏻 Styled components :
 import { Wrapper, Container, Heading, MediaList } from './Media.styled';
 
-// Axios :
+// 🅰️ Axios :
 import axios from "axios";
 
 function Media() {
@@ -45,7 +45,7 @@ function Media() {
     // Fetch des médias de type 'image' dans la BDD :
     useEffect ( () => {
       const fetchMedia = async () => {
-        const res = await axios.get(`/media?type=image`);
+        const res = await axios.get(`/media/findAll`);
         setMedia(res.data.sort((m1, m2) => {
           return new Date(m2.createdAt) - new Date(m1.createdAt); // Tri du plus récent au plus ancien
         }));

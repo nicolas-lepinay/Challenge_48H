@@ -16,6 +16,10 @@ const MediaSchema = new mongoose.Schema({
         title: {
             type: String,
         },
+        isBeingBroadcast: {
+            type: Boolean,
+            default: false,
+        },
     }, { timestamps: true }
 );
 

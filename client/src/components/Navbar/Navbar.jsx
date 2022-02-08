@@ -1,18 +1,14 @@
-// React :
+// 🌌 React :
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
-// Styled components :
-import { MATERIAL_STYLE, Nav, List, Item, Avatar, SVG, Logo, HR, Alert } from './Navbar.styled';
+// 💅🏻 Styled components :
+import { Nav, List, Item, SVG, HR } from './Navbar.styled';
 
-// UserContext :
+// 🦸‍♀️ User Context :
 import { UserContext } from "../../context/UserContext";
 
-// Axios :
-import axios from "axios";
-
-
-function Navbar({ setDashboard, setMedia }) {
+function Navbar() {
 
     const MEDIA = process.env.REACT_APP_PUBLIC_MEDIA_FOLDER;
     const ASSETS = process.env.REACT_APP_PUBLIC_ASSETS_FOLDER;
@@ -20,7 +16,7 @@ function Navbar({ setDashboard, setMedia }) {
     // 🦸 UserContext :
     const { user, setUser } = useContext(UserContext);
 
-    // Log out user :
+    // 🏃 Log out user :
     const logout = () => {
         setUser(null);
         localStorage.removeItem("user");
@@ -29,14 +25,6 @@ function Navbar({ setDashboard, setMedia }) {
   return (
         <Nav>
             <List>
-                {/* PROFILE */}
-                {/* <Link to="/home" className="link">
-                    <Item className="no-shadow">
-                        <SVG src={`${ASSETS}/icons/navbar-person.svg`} />
-                        <div className="tooltip">Home</div>
-                    </Item>
-                </Link> */}
-
                 {/* PROFILE */}
                 <Item className="default-cursor">
                     <SVG src={`${ASSETS}/icons/navbar-person.svg`} />

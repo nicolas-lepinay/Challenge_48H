@@ -34,9 +34,8 @@ app.use(morgan('common'));
 app.use("/api/auth", authRoute);
 app.use("/api/media", mediaRoute);
 
-// IMAGE UPLOADING :
-
-const storage = multer.diskStorage({
+// 🖼️ IMAGE UPLOADING 🖼️
+const image_storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "public/media/image");
     },
@@ -45,15 +44,35 @@ const storage = multer.diskStorage({
       },
 });
 
-const upload = multer({ storage: storage });
+const uploadImage = multer({ storage: image_storage });
 
-app.post("/api/uploadImage", upload.single("file"), (req, res) => {
+app.post("/api/upload/image", uploadImage.single("file"), (req, res) => {
     try {
       return res.status(200).json("File has been uploaded successfully.");
     } catch (err) {
       console.error(err);
     }
   });
+
+// 📽️ VIDEO UPLOADING 📽️
+const video_storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, "public/media/video");
+  },
+  filename: (req, file, cb) => {
+      cb(null, req.body.name);
+    },
+});
+
+const uploadVideo = multer({ storage: video_storage });
+
+app.post("/api/upload/video", uploadVideo.single("file"), (req, res) => {
+  try {
+    return res.status(200).json("File has been uploaded successfully.");
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 
 const port = 8800;

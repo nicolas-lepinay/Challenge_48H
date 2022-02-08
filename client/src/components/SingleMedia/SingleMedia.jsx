@@ -22,28 +22,37 @@ function SingleMedia({ media }) {
     }
 
     const broadcast = async () => {
-
+        try {
+            await axios.put(`/media/${media?._id}/broadcast`);
+            window.location.reload();
+        } catch(err) {
+            console.log(err);
+            alert("Une erreur s'est produite lors du processus de diffusion.")
+        }
     }
 
   return (
-    <Container>
+    <Container className={media?.isBeingBroadcast ? "broadcast" : ""} >
         <Content>
-            <Image src={`${MEDIA}/${media?.type}/${media?.file}`} />
-            <Info>{media?.title || 'Sans titre'}</Info>
+            {media?.type === 'image' && <Image src={`${MEDIA}/${media?.type}/${media?.file}`} />}
+            {media?.type === 'video' && <Image src={`${ASSETS}/video_thumbnail.png`} />}
+            <div style={{display: "flex", flexDirection: "column", gap: "0.7rem"}}>
+                <Info>{media?.title || 'Sans titre'}</Info>
+                <Info style={{fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px'}}>{media?.type}</Info>
+            </div>
         </Content>
         <Actions>
 
-            <Icon
-                src={`${ASSETS}/icons/media-broadcast.svg`}
-                onClick={deleteMedia}
-                title="Diffuser ce média"
-            />
+            <div className="wrapper" onClick={broadcast} > 
+                <Icon src={`${ASSETS}/icons/media-broadcast.svg`} className={media?.isBeingBroadcast ? "broadcast" : ""} />
+                <div className="tooltip">{media?.isBeingBroadcast ? "Arrêter ce média" : "Diffuser ce média"}</div>
+            </div>
 
-            <Icon
-                src={`${ASSETS}/icons/media-delete.svg`}
-                onClick={broadcast}
-                title="Êtes-vous sûr(e) de vouloir supprimer ce média ?"
-            />
+            <div className="wrapper" onClick={deleteMedia} >
+                <Icon src={`${ASSETS}/icons/media-delete.svg`}/>
+                <div className="tooltip">Supprimer ce média</div>
+            </div>
+
         </Actions>
     </Container>
   );

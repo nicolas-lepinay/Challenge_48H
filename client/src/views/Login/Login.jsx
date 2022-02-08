@@ -2,13 +2,13 @@
 import { useState, useEffect, useContext, useRef } from "react"
 import { Link, useHistory } from "react-router-dom"
 
-// User Context :
+// 🦸‍♀️ User Context :
 import { UserContext } from "../../context/UserContext"
 
-// Styled components :
+// 💅🏻 Styled components :
 import { Container, Box, Sidebar, SidebarContent, LogoContainer, Logo, SidebarFooter, Button, Main, MainTitle, Input } from './Login.styled';
 
-// Axios :
+// 🅰️ Axios :
 import axios from "axios";
 
 function Login() {

@@ -1,4 +1,4 @@
-// React :
+// 🌌 React :
 import { useState, useEffect, useContext } from "react"
 import { Link, useHistory } from "react-router-dom"
 
@@ -8,7 +8,7 @@ import { UserContext } from "../../context/UserContext"
 // React Components:
 import Navbar from '../../components/Navbar/Navbar.jsx';
 
-// Styled components :
+// 💅🏻 Styled components :
 import { Wrapper, Container, Heading } from './Dashboard.styled';
 
 function Dashboard() {

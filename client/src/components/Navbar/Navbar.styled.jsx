@@ -50,7 +50,7 @@ export const Item = styled.li`
 	position: relative;
     width: 48px;
 	transition: all .3s ease-in-out;
-    & .tooltip {
+    & > .tooltip {
         background-color: rgba(236, 67, 99);
         border-radius: 200px;
         color: #fff;
@@ -78,7 +78,7 @@ export const Item = styled.li`
             transform: scale(1.2);
             transition: all .4s ease-in-out;
         }
-        & .tooltip {
+        & > .tooltip {
             opacity: 1;
             visibility: visible;
             transform: translate(0);

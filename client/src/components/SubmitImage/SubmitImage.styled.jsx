@@ -28,6 +28,7 @@ export const Top = styled.div`
 
 export const HR = styled.hr`
     margin: 20px;
+    opacity: 0.3;
 `
 
 export const Bottom = styled.form`
@@ -37,6 +38,7 @@ export const Bottom = styled.form`
 `
 
 export const Options = styled.div`
+    align-items: center;
     display: flex;
 `
 
